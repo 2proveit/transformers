@@ -2086,7 +2086,7 @@ class Trainer:
             self.create_optimizer_and_scheduler(num_training_steps=max_steps)
 
         # prepare using `accelerator` prepare
-        if use_accelerator_prepare:
+        if use_accelerator_prepare or hasattr(model, "module"):
             self.model.train()
             if hasattr(self.lr_scheduler, "step"):
                 if self.use_apex:
